@@ -3,6 +3,7 @@
     <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
     <name>Game events</name>
     <events>
+        <include>Common Events</include>
         <variable constant="0" name="MeDead" sid="136808712321663" static="0" type="number">0</variable>
         <variable constant="0" name="currentTopRow" sid="463158168798838" static="0" type="number">1</variable>
         <variable constant="0" name="currentBottomRow" sid="501963743550053" static="0" type="number">46</variable>
@@ -16,79 +17,6 @@
         <variable constant="0" name="EraseBottomRow" sid="201568217494612" static="0" type="number">0</variable>
         <variable constant="0" name="CurrentTopRowTile" sid="320568158349247" static="0" type="number">0</variable>
         <variable constant="0" name="EraseTopRow" sid="520284518038780" static="0" type="number">0</variable>
-        <event-group description="Functions to manage updating the LogText object as messages are added." sid="1791290436183513" title="Message log">
-            <sub-events>
-                <comment>This is similar to the chat example, but instead of keeping a log in a text box, we keep it in an ordinary Text object so we can see things behind it. However the text object cannot scroll its text, so instead we keep the last 20 messages in an array, and update the text object from that. This is a simple way to have the messages scroll up as more messages are added.&#x0D;&#x0A;&#x0D;&#x0A;First when adding a log we add the line to the end of an array.</comment>
-                <event-block sid="3741239314027745">
-                    <conditions>
-                        <condition id="0" name="On function" sid="3529265392166413" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="5" name="Push" sid="6698752194726339" type="LogMessages">
-                            <param id="0" name="Where">0</param>
-                            <param id="1" name="Value">Function.Param(0)</param>
-                            <param id="2" name="Axis">0</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <comment>If we are over 20 messages, delete the first (oldest) message.</comment>
-                        <event-block sid="983278788832114">
-                            <conditions>
-                                <condition id="7" name="Compare size" sid="7310059575582961" type="LogMessages">
-                                    <param id="0" name="Axis">0</param>
-                                    <param id="1" name="Comparison">4</param>
-                                    <param id="2" name="Value">20</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="6" name="Pop" sid="5192169645031299" type="LogMessages">
-                                    <param id="0" name="Where">1</param>
-                                    <param id="1" name="Axis">0</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>Reset the log text to empty - we will rebuild it completely from the array.</comment>
-                        <event-block sid="1153148489572105">
-                            <conditions />
-                            <actions>
-                                <action id="0" name="Set text" sid="5708448294984055" type="LogText">
-                                    <param id="0" name="Text">&quot;&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <comment>For each element will repeat for each chat log we&apos;ve added in order, so we can append the message with a line break.</comment>
-                        <event-block sid="3063742801630883">
-                            <conditions>
-                                <condition id="3" name="For each element" sid="9969388581769486" type="LogMessages">
-                                    <param id="0" name="Axes">2</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="1" name="Append text" sid="6284233068137536" type="LogText">
-                                    <param id="0" name="Text">LogMessages.CurValue &amp; newline</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>Adding a chat message just calls &apos;AddLog&apos; with the alias and message, e.g. &lt;Joe&gt; Hello world!</comment>
-                <event-block sid="5027533881398616">
-                    <conditions>
-                        <condition id="0" name="On function" sid="2551765588169597" type="Function">
-                            <param id="0" name="Name">&quot;AddChat&quot;</param>
-                        </condition>
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="2898805170974315" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;&lt;&quot; &amp; Function.Param(0) &amp; &quot;&gt; &quot; &amp; Function.Param(1)</param>
-                        </action>
-                    </actions>
-                </event-block>
-            </sub-events>
-        </event-group>
         <event-group description="Manages connecting to the signalling server and joining the room." sid="5828038468308097" title="Signalling">
             <sub-events>
                 <comment>On start of layout, connect to the signalling server. We also set up which client input values the peers will be using, and sync the Peer object with its position and additional instance variables for the look position, current inputs and player stats.</comment>
@@ -97,240 +25,57 @@
                         <condition id="-2" name="On start of layout" sid="8545342922442215" type="System" />
                     </conditions>
                     <actions>
-                        <action id="15" name="Add client input value" sid="215118277476213" type="Multiplayer">
-                            <param id="0" name="Tag">&quot;inputs&quot;</param>
-                            <param id="1" name="Precision">3</param>
-                            <param id="2" name="Interpolation">0</param>
-                        </action>
-                        <action id="11" name="Sync object" sid="2351988127461845" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Data">3</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Bandwidth">0</param>
-                        </action>
-                        <action id="11" name="Sync object" sid="362089013627566" type="Multiplayer">
-                            <param id="0" name="Object">Shield</param>
-                            <param id="1" name="Data">3</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Bandwidth">0</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="1084595683165889" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|inputs</param>
-                            <param id="2" name="Precision">3</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;inputs&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="1877625592048931" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|health</param>
-                            <param id="2" name="Precision">3</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="6184510421650488" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|kills</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="4210123733721239" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|deaths</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="213322743558198" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|bash</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="744824283610212" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|currentTile</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="509920084787735" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|falling</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="12" name="Sync instance variable" sid="917814254047263" type="Multiplayer">
-                            <param id="0" name="Object">Peer</param>
-                            <param id="1" name="Instance variable">Peer|stamina</param>
-                            <param id="2" name="Precision">2</param>
-                            <param id="3" name="Interpolation">0</param>
-                            <param id="4" name="Client value tag">&quot;&quot;</param>
-                        </action>
-                        <action id="1" name="Connect" sid="7537126393271732" type="Multiplayer">
-                            <param id="0" name="Server">&quot;wss://multiplayer.scirra.com&quot;</param>
-                        </action>
-                    </actions>
-                    <sub-events>
-                        <event-block sid="990938431948530">
-                            <conditions>
-                                <condition id="-14" name="Compare variable" sid="566647781306448" type="System">
-                                    <param id="0" name="Variable">MyUsername</param>
-                                    <param id="1" name="Comparison">0</param>
-                                    <param id="2" name="Value">&quot;&quot;</param>
-                                </condition>
-                            </conditions>
-                            <actions>
-                                <action id="-9" name="Set value" sid="452774676859742" type="System">
-                                    <param id="0" name="Variable">MyUsername</param>
-                                    <param id="1" name="Value">&quot;Stan&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                    </sub-events>
-                </event-block>
-                <comment>When connected, request to log in.</comment>
-                <event-block sid="6173368493187684">
-                    <conditions>
-                        <condition id="2" name="On connected" sid="633718780657259" type="Multiplayer" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="4471249425451181" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Connected, logging in...&quot;</param>
-                        </action>
-                        <action id="4" name="Log in" sid="5152430702167834" type="Multiplayer">
-                            <param id="0" name="Alias">MyUsername</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>When logged in, request to join the room.</comment>
-                <event-block sid="7761898484234081">
-                    <conditions>
-                        <condition id="4" name="On logged in" sid="5883027386699968" type="Multiplayer" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="2772881125840144" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Logged in with alias: &quot; &amp; Multiplayer.MyAlias &amp; &quot; (&quot; &amp; Multiplayer.MyID &amp; &quot;)&quot; &amp; newline &amp; &quot;Joining room...&quot;</param>
-                        </action>
-                        <action id="5" name="Join room" sid="8803625540397218" type="Multiplayer">
-                            <param id="0" name="Game">GAME_NAME</param>
-                            <param id="1" name="Instance">INSTANCE_NAME</param>
-                            <param id="2" name="Room">ROOM_NAME</param>
-                            <param id="3" name="Max peers">0</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>We joined the room: activate either the Host or the Peer group. The host also has text object appear to indicate they are the host.</comment>
-                <event-block sid="1579184355259559">
-                    <conditions>
-                        <condition id="5" name="On joined room" sid="9574597696892548" type="Multiplayer" />
-                    </conditions>
-                    <actions>
                         <action id="-9" name="Destroy" sid="9105323197347259" type="Peer" />
                         <action id="-9" name="Destroy" sid="519340354238036" type="Shield" />
                     </actions>
                     <sub-events>
-                        <comment>As the host, we also adopt the existing Peer object in the layout as our own player. We must set its peer ID to our own ID and tell the Multiplayer object it is associated with ourselves.</comment>
-                        <event-block sid="611524856039149">
+                        <event-block sid="972121652751109">
                             <conditions>
-                                <condition id="10" name="Is host" sid="6151152733133221" type="Multiplayer" />
+                                <condition id="9" inverted="1" name="Is in room" sid="795904923169429" type="Multiplayer" />
                             </conditions>
                             <actions>
-                                <action id="0" name="Call function" sid="7519364054339538" type="Function">
-                                    <param id="0" name="Name">&quot;AddLog&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Joined room as host&quot;</param>
+                                <action id="5" name="Join room" sid="973369174800082" type="Multiplayer">
+                                    <param id="0" name="Game">GAME_NAME</param>
+                                    <param id="1" name="Instance">INSTANCE_NAME</param>
+                                    <param id="2" name="Room">ROOM_NAME</param>
+                                    <param id="3" name="Max peers">7</param>
                                 </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="909527345615111">
+                            <conditions>
+                                <condition id="-22" name="Else" sid="604887997365926" type="System" />
+                            </conditions>
+                            <actions>
                                 <action id="-12" name="Set group active" sid="5094248200865487" type="System">
                                     <param id="0" name="Group name">&quot;Host&quot;</param>
                                     <param id="1" name="State">1</param>
                                 </action>
                             </actions>
                         </event-block>
-                        <comment>When not the host, the Peer object already in the layout is destroyed. &apos;Sync object&apos; will create the peer for ourselves, possibly in a different location, and we&apos;ll associate it then. (See the &apos;Peer&apos; group&apos;s &apos;On object created&apos;)</comment>
-                        <event-block sid="8025172574882813">
-                            <conditions>
-                                <condition id="-22" name="Else" sid="4491209143547917" type="System" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="1836078895724226" type="Function">
-                                    <param id="0" name="Name">&quot;AddLog&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Joined room as peer&quot;</param>
-                                </action>
-                                <action id="-12" name="Set group active" sid="3086355252968577" type="System">
-                                    <param id="0" name="Group name">&quot;Peer&quot;</param>
-                                    <param id="1" name="State">1</param>
-                                </action>
-                                <action id="0" name="Call function" sid="9292313233183488" type="Function">
-                                    <param id="0" name="Name">&quot;AddLog&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;Attempting to establish connection to host...&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
                     </sub-events>
                 </event-block>
-                <comment>If we leave, get disconnected or encounter an error, add it to the log.</comment>
-                <event-block sid="3191386697509821">
+            </sub-events>
+        </event-group>
+        <event-block sid="951681637898076">
+            <conditions>
+                <condition id="5" name="On joined room" sid="798580674931183" type="Multiplayer" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="914767389720623">
                     <conditions>
-                        <condition id="3" name="On disconnected" sid="7355024061540087" type="Multiplayer" />
+                        <condition id="10" inverted="1" name="Is host" sid="999617504781673" type="Multiplayer" />
                     </conditions>
                     <actions>
-                        <action id="0" name="Call function" sid="9387019022730535" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Signalling disconnected&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="7454512880658015">
-                    <conditions>
-                        <condition id="1" name="On error" sid="7405991194607134" type="Multiplayer" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="6681798860206169" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Signalling error: &quot; &amp; Multiplayer.ErrorMessage</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="833882481570433">
-                    <conditions>
-                        <condition id="6" name="On left room" sid="4349773980818516" type="Multiplayer" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="4110183784093897" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Signalling: left room&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <event-block sid="5945267911170749">
-                    <conditions>
-                        <condition id="14" name="On kicked" sid="3123559417693109" type="Multiplayer" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Call function" sid="3541078117429122" type="Function">
-                            <param id="0" name="Name">&quot;AddLog&quot;</param>
-                            <param id="1" name="Parameter {n}">&quot;Kicked (either could not connect to host or host quit)&quot;</param>
-                        </action>
-                    </actions>
-                </event-block>
-                <comment>Update the NetStats text object in the bottom left with details like the peer count, inbound and outbound bandwidth, host ping and PDV.</comment>
-                <event-block sid="6222937938240554">
-                    <conditions>
-                        <condition id="-1" name="Every tick" sid="5568020922559877" type="System" />
-                    </conditions>
-                    <actions>
-                        <action id="0" name="Set text" sid="3573965697186698" type="NetStats">
-                            <param id="0" name="Text">Multiplayer.PeerCount &amp; &quot; peers connected&quot; &amp; newline &amp; Multiplayer.StatInboundCount &amp; &quot; in (&quot; &amp; (round(Multiplayer.StatInboundBandwidth/100)/10) &amp; &quot; k) / sec&quot; &amp; newline &amp; Multiplayer.StatOutboundCount &amp; &quot; out (&quot; &amp; (round(Multiplayer.StatOutboundBandwidth/100)/10) &amp; &quot; k) / sec&quot; &amp; newline &amp; &quot;Host ping &quot; &amp; round(Multiplayer.PeerLatency(Multiplayer.HostID)) &amp; &quot;, PDV &quot; &amp; round(Multiplayer.PeerPDV(Multiplayer.HostID)) &amp; &quot;, Cooldown:&quot; &amp; Peer.bashCoolDown</param>
+                        <action id="-12" name="Set group active" sid="3086355252968577" type="System">
+                            <param id="0" name="Group name">&quot;Peer&quot;</param>
+                            <param id="1" name="State">1</param>
                         </action>
                     </actions>
                 </event-block>
             </sub-events>
-        </event-group>
+        </event-block>
         <event-group description="Manages the gameplay and synchronisation." sid="8255319576193919" title="Game">
             <sub-events>
                 <event-group description="Events specific to peers (i.e. non-host users)" inactive="1" sid="3251139189519888" title="Peer">
@@ -674,7 +419,7 @@
                         <comment>As the host, when a peer joins we create a new Peer object for them. &apos;Sync object&apos; will then notify all the peers that this object was created. We set the created instance&apos;s peer ID variable to the associated peer. Finally we use the &apos;Associate object&apos; action in the Multiplayer object to tell it that this instance represents that peer.</comment>
                         <event-block sid="3431678512597868">
                             <conditions>
-                                <condition id="11" name="On peer connected" sid="5278329796908354" type="Multiplayer" />
+                                <condition id="11" name="On peer connected" sid="506939733683995" type="Multiplayer" />
                             </conditions>
                             <actions>
                                 <action id="-3" name="Create object" sid="71668082977051" type="System">
@@ -717,9 +462,14 @@
                         <event-block sid="148661461990560">
                             <conditions>
                                 <condition id="-7" name="Compare time" sid="610040115908620" type="System">
-                                    <param id="0" name="Comparison">0</param>
-                                    <param id="1" name="Time (seconds)">60.0</param>
+                                    <param id="0" name="Comparison">4</param>
+                                    <param id="1" name="Time (seconds)">120</param>
                                 </condition>
+                                <condition id="20" name="Compare peer count" sid="596011894726469" type="Multiplayer">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Count">3</param>
+                                </condition>
+                                <condition id="-4" name="Trigger once while true" sid="639010721969690" type="System" />
                             </conditions>
                             <actions>
                                 <action id="-12" name="Set group active" sid="418627404039777" type="System">
@@ -1097,13 +847,13 @@
                         <comment>As host, we also need to update all the other players to reflect what they are doing. Therefore we iterate all peers who are *not* our own player, and update their instance variables based on their latest received inputs (from the PeerState expression).</comment>
                         <event-block sid="9848056887334073">
                             <conditions>
+                                <condition id="-11" name="For Each" sid="233319911430755" type="System">
+                                    <param id="0" name="Object">Peer</param>
+                                </condition>
                                 <condition id="-7" name="Compare instance variable" sid="1724488587194735" type="Peer">
                                     <param id="0" name="Instance variable">peerid</param>
                                     <param id="1" name="Comparison">1</param>
                                     <param id="2" name="Value">Multiplayer.MyID</param>
-                                </condition>
-                                <condition id="-11" name="For Each" sid="233319911430755" type="System">
-                                    <param id="0" name="Object">Peer</param>
                                 </condition>
                             </conditions>
                             <actions>
@@ -1718,29 +1468,6 @@
                 </event-group>
                 <event-group description="Events that are common to both the host and peers." sid="5870562097836775" title="Common">
                     <sub-events>
-                        <comment>Whenever a peer joins or leaves, log the event so the user can see what happened.</comment>
-                        <event-block sid="4933736723213277">
-                            <conditions>
-                                <condition id="11" name="On peer connected" sid="8555101434504378" type="Multiplayer" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="6832361032981173" type="Function">
-                                    <param id="0" name="Name">&quot;AddLog&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&apos;&quot; &amp; Multiplayer.PeerAlias &amp; &quot;&apos; joined&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
-                        <event-block sid="6299574777196556">
-                            <conditions>
-                                <condition id="13" name="On peer disconnected" sid="8841003295953043" type="Multiplayer" />
-                            </conditions>
-                            <actions>
-                                <action id="0" name="Call function" sid="5163636283188274" type="Function">
-                                    <param id="0" name="Name">&quot;AddLog&quot;</param>
-                                    <param id="1" name="Parameter {n}">&quot;&apos;&quot; &amp; Multiplayer.PeerAlias &amp; &quot;&apos; left&quot;</param>
-                                </action>
-                            </actions>
-                        </event-block>
                         <comment>Regardless of whether we are host or peer, we want our own player to look at the mouse.</comment>
                         <event-block sid="2538876316377638">
                             <conditions>

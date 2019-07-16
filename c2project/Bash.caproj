@@ -284,15 +284,21 @@
             <plugin id="NinePatch" />
             <texture original-source="C:\Users\CGumb\Desktop\MyGames\ad\Assets\stamina-bar.png" />
         </object-type>
+        <object-type name="button__rdy" sid="598802966366530">
+            <plugin id="Button" />
+        </object-type>
     </object-folder>
     <families />
     <layout-folder>
         <layout>Login.xml</layout>
+        <layout>WaitingRoom.xml</layout>
         <layout>Game.xml</layout>
     </layout-folder>
     <event-folder>
         <event-sheet>Game events.xml</event-sheet>
         <event-sheet>Login events.xml</event-sheet>
+        <event-sheet>WaitingRoom events.xml</event-sheet>
+        <event-sheet>Common Events.xml</event-sheet>
     </event-folder>
     <global-instances>
         <global-instance type="Multiplayer" uid="2" />

@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>WaitingRoom events</name>
+    <events>
+        <variable constant="0" name="playerRdy" sid="509211917602992" static="0" type="number">0</variable>
+        <include>Common Events</include>
+        <event-block sid="236678148158016">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="149895251133964" type="System" />
+            </conditions>
+            <actions>
+                <action id="15" name="Add client input value" sid="878768370356559" type="Multiplayer">
+                    <param id="0" name="Tag">&quot;inputs&quot;</param>
+                    <param id="1" name="Precision">3</param>
+                    <param id="2" name="Interpolation">0</param>
+                </action>
+                <action id="11" name="Sync object" sid="922053358603345" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Data">3</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Bandwidth">0</param>
+                </action>
+                <action id="11" name="Sync object" sid="603722299139487" type="Multiplayer">
+                    <param id="0" name="Object">Shield</param>
+                    <param id="1" name="Data">3</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Bandwidth">0</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="217303155753782" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|inputs</param>
+                    <param id="2" name="Precision">3</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;inputs&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="708137147190825" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|health</param>
+                    <param id="2" name="Precision">3</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="187980068928070" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|kills</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="143035052974796" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|deaths</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="135150380078572" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|bash</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="278518806048184" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|currentTile</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="728764028206232" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|falling</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="12" name="Sync instance variable" sid="671272291468053" type="Multiplayer">
+                    <param id="0" name="Object">Peer</param>
+                    <param id="1" name="Instance variable">Peer|stamina</param>
+                    <param id="2" name="Precision">2</param>
+                    <param id="3" name="Interpolation">0</param>
+                    <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="1" name="Connect" sid="326941105381039" type="Multiplayer">
+                    <param id="0" name="Server">&quot;wss://multiplayer.scirra.com&quot;</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="717480736431644">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="934639690221698" type="System">
+                            <param id="0" name="Variable">MyUsername</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="887995880366296" type="System">
+                            <param id="0" name="Variable">MyUsername</param>
+                            <param id="1" name="Value">&quot;Stan&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="425337066673831">
+                    <conditions>
+                        <condition id="-14" name="Compare variable" sid="755496252549205" type="System">
+                            <param id="0" name="Variable">ROOM_NAME</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">&quot;&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="733913191938016" type="System">
+                            <param id="0" name="Variable">ROOM_NAME</param>
+                            <param id="1" name="Value">&quot;Room47&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>When connected, request to log in.</comment>
+        <event-block sid="349986806081840">
+            <conditions>
+                <condition id="2" name="On connected" sid="380823792880000" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="772475294081245" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;Connected, logging in...&quot;</param>
+                </action>
+                <action id="4" name="Log in" sid="375154388409441" type="Multiplayer">
+                    <param id="0" name="Alias">MyUsername</param>
+                </action>
+                <action id="0" name="Set text" sid="881891264906993" type="text__room">
+                    <param id="0" name="Text">&quot;Room: &quot;&amp;ROOM_NAME</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>When logged in, request to join the room.</comment>
+        <event-block sid="225924306542012">
+            <conditions>
+                <condition id="4" name="On logged in" sid="598294302264480" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="763166192029237" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;Logged in with alias: &quot; &amp; Multiplayer.MyAlias &amp; &quot; (&quot; &amp; Multiplayer.MyID &amp; &quot;)&quot; &amp; newline &amp; &quot;Joining room...&quot;</param>
+                </action>
+                <action id="5" name="Join room" sid="911549332972120" type="Multiplayer">
+                    <param id="0" name="Game">GAME_NAME</param>
+                    <param id="1" name="Instance">INSTANCE_NAME</param>
+                    <param id="2" name="Room">ROOM_NAME</param>
+                    <param id="3" name="Max peers">7</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="749902516331090">
+            <conditions>
+                <condition id="5" name="On joined room" sid="404813731261852" type="Multiplayer" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="162365215873265">
+                    <conditions>
+                        <condition id="10" name="Is host" sid="281469092624374" type="Multiplayer" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="789840027151540" type="button__rdy" />
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <event-block sid="577013312245001">
+            <conditions>
+                <condition id="0" name="On clicked" sid="373245032677165" type="button__rdy" />
+                <condition id="10" inverted="1" name="Is host" sid="460408138836479" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="8" name="Send message" sid="563690438551120" type="Multiplayer">
+                    <param id="0" name="Peer ID">&quot;&quot;</param>
+                    <param id="1" name="Tag">&quot;rdy&quot;</param>
+                    <param id="2" name="Message">Multiplayer.MyAlias</param>
+                    <param id="3" name="Mode">0</param>
+                </action>
+                <action id="0" name="Set text" sid="643871536820763" type="button__rdy">
+                    <param id="0" name="Text">&quot;RDY&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="476199562481617">
+            <conditions>
+                <condition id="15" name="On peer message" sid="864363652069982" type="Multiplayer">
+                    <param id="0" name="Tag">&quot;rdy&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-10" name="Add to" sid="425289226561984" type="System">
+                    <param id="0" name="Variable">playerRdy</param>
+                    <param id="1" name="Value">1</param>
+                </action>
+                <action id="0" name="Call function" sid="337179305875994" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">Multiplayer.Message&amp;&quot; is ready&quot;</param>
+                </action>
+            </actions>
+            <sub-events>
+                <event-block sid="100854024276446">
+                    <conditions>
+                        <condition id="10" name="Is host" sid="829271469076460" type="Multiplayer" />
+                    </conditions>
+                    <actions>
+                        <action id="9" name="Broadcast message" sid="750344802961721" type="Multiplayer">
+                            <param id="0" name="From ID">&quot;&quot;</param>
+                            <param id="1" name="Tag">&quot;rdy&quot;</param>
+                            <param id="2" name="Message">Multiplayer.Message</param>
+                            <param id="3" name="Mode">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>We joined the room: activate either the Host or the Peer group. The host also has text object appear to indicate they are the host.</comment>
+        <event-block sid="230475900572189">
+            <conditions>
+                <condition id="-8" name="Compare two values" sid="161710724649693" type="System">
+                    <param id="0" name="First value">playerRdy</param>
+                    <param id="1" name="Comparison">0</param>
+                    <param id="2" name="Second value">2</param>
+                </condition>
+                <condition id="-4" name="Trigger once while true" sid="465505903907295" type="System" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <event-block sid="353215889472080">
+                    <conditions>
+                        <condition id="10" inverted="1" name="Is host" sid="618566462521128" type="Multiplayer" />
+                    </conditions>
+                    <actions>
+                        <action id="6" name="Leave room" sid="343972911895074" type="Multiplayer" />
+                        <action id="-16" name="Wait" sid="925529732717313" type="System">
+                            <param id="0" name="Seconds">2.0</param>
+                        </action>
+                        <action id="-2" name="Go to layout" sid="661972495426018" type="System">
+                            <param id="0" name="Layout">Game</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="510748395298557">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="861195316768825" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-2" name="Go to layout" sid="704410543064766" type="System">
+                            <param id="0" name="Layout">Game</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+    </events>
+</c2eventsheet>

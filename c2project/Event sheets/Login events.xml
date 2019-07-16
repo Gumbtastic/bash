@@ -95,7 +95,7 @@
                             <param id="1" name="Value">RoomTextBox.Text</param>
                         </action>
                         <action id="-2" name="Go to layout" sid="6347285549464009" type="System">
-                            <param id="0" name="Layout">Game</param>
+                            <param id="0" name="Layout">WaitingRoom</param>
                         </action>
                     </actions>
                 </event-block>
@@ -111,7 +111,7 @@
                     <param id="1" name="Value">Keyboard.StringFromKeyCode(floor(random(42)+48))&amp;Keyboard.StringFromKeyCode(floor(random(42)+48))&amp;Keyboard.StringFromKeyCode(floor(random(42)+48))&amp;Keyboard.StringFromKeyCode(floor(random(42)+48))</param>
                 </action>
                 <action id="-2" name="Go to layout" sid="787084799585083" type="System">
-                    <param id="0" name="Layout">Game</param>
+                    <param id="0" name="Layout">WaitingRoom</param>
                 </action>
             </actions>
         </event-block>

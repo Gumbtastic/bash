@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>Common Events</name>
+    <events>
+        <event-group description="Functions to manage updating the LogText object as messages are added." sid="830528501940758" title="Message log">
+            <sub-events>
+                <comment>This is similar to the chat example, but instead of keeping a log in a text box, we keep it in an ordinary Text object so we can see things behind it. However the text object cannot scroll its text, so instead we keep the last 20 messages in an array, and update the text object from that. This is a simple way to have the messages scroll up as more messages are added.&#x0D;&#x0A;&#x0D;&#x0A;First when adding a log we add the line to the end of an array.</comment>
+                <event-block sid="493047061868903">
+                    <conditions>
+                        <condition id="0" name="On function" sid="915553103339886" type="Function">
+                            <param id="0" name="Name">&quot;AddLog&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="5" name="Push" sid="989175591091530" type="LogMessages">
+                            <param id="0" name="Where">0</param>
+                            <param id="1" name="Value">Function.Param(0)</param>
+                            <param id="2" name="Axis">0</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <comment>If we are over 20 messages, delete the first (oldest) message.</comment>
+                        <event-block sid="908968098182306">
+                            <conditions>
+                                <condition id="7" name="Compare size" sid="252470465332063" type="LogMessages">
+                                    <param id="0" name="Axis">0</param>
+                                    <param id="1" name="Comparison">4</param>
+                                    <param id="2" name="Value">20</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="6" name="Pop" sid="969112626440537" type="LogMessages">
+                                    <param id="0" name="Where">1</param>
+                                    <param id="1" name="Axis">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>Reset the log text to empty - we will rebuild it completely from the array.</comment>
+                        <event-block sid="687904972247125">
+                            <conditions />
+                            <actions>
+                                <action id="0" name="Set text" sid="359399458717352" type="LogText">
+                                    <param id="0" name="Text">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <comment>For each element will repeat for each chat log we&apos;ve added in order, so we can append the message with a line break.</comment>
+                        <event-block sid="780283475921948">
+                            <conditions>
+                                <condition id="3" name="For each element" sid="839787433188936" type="LogMessages">
+                                    <param id="0" name="Axes">2</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="1" name="Append text" sid="405830013480097" type="LogText">
+                                    <param id="0" name="Text">LogMessages.CurValue &amp; newline</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Adding a chat message just calls &apos;AddLog&apos; with the alias and message, e.g. &lt;Joe&gt; Hello world!</comment>
+                <event-block sid="955002968951482">
+                    <conditions>
+                        <condition id="0" name="On function" sid="312872757602191" type="Function">
+                            <param id="0" name="Name">&quot;AddChat&quot;</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="898639166181609" type="Function">
+                            <param id="0" name="Name">&quot;AddLog&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;&lt;&quot; &amp; Function.Param(0) &amp; &quot;&gt; &quot; &amp; Function.Param(1)</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <comment>Whenever a peer joins or leaves, log the event so the user can see what happened.</comment>
+        <event-block sid="798121817193329">
+            <conditions>
+                <condition id="11" name="On peer connected" sid="861960196126556" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="422892949481367" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;&apos;&quot; &amp; Multiplayer.PeerAlias &amp; &quot;&apos; joined&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="858404977775235">
+            <conditions>
+                <condition id="13" name="On peer disconnected" sid="603072691409638" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="626535405279418" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;&apos;&quot; &amp; Multiplayer.PeerAlias &amp; &quot;&apos; left&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <comment>If we leave, get disconnected or encounter an error, add it to the log.</comment>
+        <event-block sid="479511241110628">
+            <conditions>
+                <condition id="3" name="On disconnected" sid="284568865038972" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="131116966068891" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;Signalling disconnected&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="448057551249845">
+            <conditions>
+                <condition id="1" name="On error" sid="475322254659679" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="461495195977952" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;Signalling error: &quot; &amp; Multiplayer.ErrorMessage</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="815686668120443">
+            <conditions>
+                <condition id="6" name="On left room" sid="680072459747886" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="221314725756800" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;Signalling: left room&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="634575719434433">
+            <conditions>
+                <condition id="14" name="On kicked" sid="625386944731233" type="Multiplayer" />
+            </conditions>
+            <actions>
+                <action id="0" name="Call function" sid="348313937004086" type="Function">
+                    <param id="0" name="Name">&quot;AddLog&quot;</param>
+                    <param id="1" name="Parameter {n}">&quot;Kicked (either could not connect to host or host quit)&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="730962087571316">
+            <conditions>
+                <condition id="5" name="On joined room" sid="432717053789266" type="Multiplayer" />
+            </conditions>
+            <actions />
+            <sub-events>
+                <comment>As the host, we also adopt the existing Peer object in the layout as our own player. We must set its peer ID to our own ID and tell the Multiplayer object it is associated with ourselves.</comment>
+                <event-block sid="993700154297435">
+                    <conditions>
+                        <condition id="10" name="Is host" sid="778051006026821" type="Multiplayer" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="250265611931098" type="Function">
+                            <param id="0" name="Name">&quot;AddLog&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Joined room as host&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <comment>When not the host, the Peer object already in the layout is destroyed. &apos;Sync object&apos; will create the peer for ourselves, possibly in a different location, and we&apos;ll associate it then. (See the &apos;Peer&apos; group&apos;s &apos;On object created&apos;)</comment>
+                <event-block sid="122312300632447">
+                    <conditions>
+                        <condition id="-22" name="Else" sid="841590594347471" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="0" name="Call function" sid="896781538001710" type="Function">
+                            <param id="0" name="Name">&quot;AddLog&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Joined room as peer&quot;</param>
+                        </action>
+                        <action id="0" name="Call function" sid="899400259531408" type="Function">
+                            <param id="0" name="Name">&quot;AddLog&quot;</param>
+                            <param id="1" name="Parameter {n}">&quot;Attempting to establish connection to host...&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-block>
+        <comment>Update the NetStats text object in the bottom left with details like the peer count, inbound and outbound bandwidth, host ping and PDV.</comment>
+        <event-block sid="256459220805212">
+            <conditions>
+                <condition id="-1" name="Every tick" sid="262321196286971" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="302871981683145" type="NetStats">
+                    <param id="0" name="Text">Multiplayer.PeerCount &amp; &quot; peers connected&quot; &amp; newline &amp; Multiplayer.StatInboundCount &amp; &quot; in (&quot; &amp; (round(Multiplayer.StatInboundBandwidth/100)/10) &amp; &quot; k) / sec&quot; &amp; newline &amp; Multiplayer.StatOutboundCount &amp; &quot; out (&quot; &amp; (round(Multiplayer.StatOutboundBandwidth/100)/10) &amp; &quot; k) / sec&quot; &amp; newline &amp; &quot;Host ping &quot; &amp; round(Multiplayer.PeerLatency(Multiplayer.HostID)) &amp; &quot;, PDV &quot; &amp; round(Multiplayer.PeerPDV(Multiplayer.HostID)) &amp; &quot;, Cooldown:&quot; &amp; Peer.bashCoolDown</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>
