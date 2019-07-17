@@ -21,12 +21,6 @@
                     <param id="2" name="Precision">2</param>
                     <param id="3" name="Bandwidth">0</param>
                 </action>
-                <action id="11" name="Sync object" sid="603722299139487" type="Multiplayer">
-                    <param id="0" name="Object">Shield</param>
-                    <param id="1" name="Data">3</param>
-                    <param id="2" name="Precision">2</param>
-                    <param id="3" name="Bandwidth">0</param>
-                </action>
                 <action id="12" name="Sync instance variable" sid="217303155753782" type="Multiplayer">
                     <param id="0" name="Object">Peer</param>
                     <param id="1" name="Instance variable">Peer|inputs</param>
@@ -82,6 +76,12 @@
                     <param id="2" name="Precision">2</param>
                     <param id="3" name="Interpolation">0</param>
                     <param id="4" name="Client value tag">&quot;&quot;</param>
+                </action>
+                <action id="11" name="Sync object" sid="603722299139487" type="Multiplayer">
+                    <param id="0" name="Object">Shield</param>
+                    <param id="1" name="Data">3</param>
+                    <param id="2" name="Precision">1</param>
+                    <param id="3" name="Bandwidth">0</param>
                 </action>
                 <action id="1" name="Connect" sid="326941105381039" type="Multiplayer">
                     <param id="0" name="Server">&quot;wss://multiplayer.scirra.com&quot;</param>

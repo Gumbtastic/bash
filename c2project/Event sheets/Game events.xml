@@ -31,7 +31,7 @@
                     <sub-events>
                         <event-block sid="972121652751109">
                             <conditions>
-                                <condition id="9" inverted="1" name="Is in room" sid="795904923169429" type="Multiplayer" />
+                                <condition id="10" inverted="1" name="Is host" sid="795904923169429" type="Multiplayer" />
                             </conditions>
                             <actions>
                                 <action id="5" name="Join room" sid="973369174800082" type="Multiplayer">
@@ -850,11 +850,6 @@
                                 <condition id="-11" name="For Each" sid="233319911430755" type="System">
                                     <param id="0" name="Object">Peer</param>
                                 </condition>
-                                <condition id="-7" name="Compare instance variable" sid="1724488587194735" type="Peer">
-                                    <param id="0" name="Instance variable">peerid</param>
-                                    <param id="1" name="Comparison">1</param>
-                                    <param id="2" name="Value">Multiplayer.MyID</param>
-                                </condition>
                             </conditions>
                             <actions>
                                 <action id="-10" name="Set value" sid="6998076668578183" type="Peer">
@@ -1070,7 +1065,7 @@
                                             <param id="0" name="Tile X">Peer.currentTileX</param>
                                             <param id="1" name="Tile Y">Peer.currentTileY</param>
                                             <param id="2" name="Comparison">0</param>
-                                            <param id="3" name="Tile">3</param>
+                                            <param id="3" name="Tile">4</param>
                                         </condition>
                                     </conditions>
                                     <actions>
@@ -1114,18 +1109,28 @@
                                         <condition id="-6" name="Every X seconds" sid="874827014323526" type="System">
                                             <param id="0" name="Interval (seconds)">0.25</param>
                                         </condition>
-                                        <condition id="-7" name="Compare instance variable" sid="606415286042231" type="Peer">
-                                            <param id="0" name="Instance variable">stamina</param>
-                                            <param id="1" name="Comparison">2</param>
-                                            <param id="2" name="Value">100</param>
+                                        <condition id="-11" name="For Each" sid="657264174748239" type="System">
+                                            <param id="0" name="Object">Peer</param>
                                         </condition>
                                     </conditions>
-                                    <actions>
-                                        <action id="-11" name="Add to" sid="510327585917759" type="Peer">
-                                            <param id="0" name="Instance variable">stamina</param>
-                                            <param id="1" name="Value">1</param>
-                                        </action>
-                                    </actions>
+                                    <actions />
+                                    <sub-events>
+                                        <event-block sid="752071051229125">
+                                            <conditions>
+                                                <condition id="-7" name="Compare instance variable" sid="606415286042231" type="Peer">
+                                                    <param id="0" name="Instance variable">stamina</param>
+                                                    <param id="1" name="Comparison">2</param>
+                                                    <param id="2" name="Value">100</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="-11" name="Add to" sid="510327585917759" type="Peer">
+                                                    <param id="0" name="Instance variable">stamina</param>
+                                                    <param id="1" name="Value">1</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                    </sub-events>
                                 </event-block>
                                 <event-block sid="364914268385862">
                                     <conditions>
@@ -1232,11 +1237,29 @@
                                                     <param id="0" name="Tile X">Peer.currentTileX</param>
                                                     <param id="1" name="Tile Y">Peer.currentTileY</param>
                                                     <param id="2" name="Comparison">0</param>
-                                                    <param id="3" name="Tile">2</param>
+                                                    <param id="3" name="Tile">3</param>
                                                 </condition>
                                             </conditions>
                                             <actions>
                                                 <action id="1" name="Set tile" sid="312027207018154" type="map">
+                                                    <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                    <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                    <param id="2" name="Tile">4</param>
+                                                    <param id="3" name="State">0</param>
+                                                </action>
+                                            </actions>
+                                        </event-block>
+                                        <event-block sid="145261966711206">
+                                            <conditions>
+                                                <condition id="0" name="Compare tile at" sid="163618539585950" type="map">
+                                                    <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                    <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                    <param id="2" name="Comparison">0</param>
+                                                    <param id="3" name="Tile">2</param>
+                                                </condition>
+                                            </conditions>
+                                            <actions>
+                                                <action id="1" name="Set tile" sid="603101135627515" type="map">
                                                     <param id="0" name="Tile X">Peer.currentTileX</param>
                                                     <param id="1" name="Tile Y">Peer.currentTileY</param>
                                                     <param id="2" name="Tile">3</param>
@@ -1262,6 +1285,7 @@
                                                 </action>
                                             </actions>
                                         </event-block>
+                                        <variable constant="0" name="RTS" sid="340451268434360" static="0" type="number">0</variable>
                                         <event-block sid="724509981743148">
                                             <conditions>
                                                 <condition id="0" name="Compare tile at" sid="198547197590383" type="map">
@@ -1278,7 +1302,125 @@
                                                     <param id="2" name="Tile">1</param>
                                                     <param id="3" name="State">0</param>
                                                 </action>
+                                                <action id="-9" name="Set value" sid="903067195144994" type="System">
+                                                    <param id="0" name="Variable">RTS</param>
+                                                    <param id="1" name="Value">floor(random(0,6))</param>
+                                                </action>
                                             </actions>
+                                            <sub-events>
+                                                <event-block disabled="1" sid="122326059460862">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="515441484514242" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">0</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="897607549831718" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">1</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block disabled="1" sid="228380873287492">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="168221125619335" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">1</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="928066334617063" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">2</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block disabled="1" sid="818944460770547">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="345895515159375" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">2</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="445891525496321" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">3</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block disabled="1" sid="578731851809894">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="799540885697003" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">3</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="169228415971716" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">4</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block disabled="1" sid="981450615504969">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="389481132179819" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">4</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="378241193079554" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">5</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block disabled="1" sid="130809810755362">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="452676663377050" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">5</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="222834499331750" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">6</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                                <event-block disabled="1" sid="762843819305220">
+                                                    <conditions>
+                                                        <condition id="-14" name="Compare variable" sid="341488551687433" type="System">
+                                                            <param id="0" name="Variable">RTS</param>
+                                                            <param id="1" name="Comparison">0</param>
+                                                            <param id="2" name="Value">6</param>
+                                                        </condition>
+                                                    </conditions>
+                                                    <actions>
+                                                        <action id="6" name="Set tile state" sid="483178501060145" type="map">
+                                                            <param id="0" name="Tile X">Peer.currentTileX</param>
+                                                            <param id="1" name="Tile Y">Peer.currentTileY</param>
+                                                            <param id="2" name="State">7</param>
+                                                        </action>
+                                                    </actions>
+                                                </event-block>
+                                            </sub-events>
                                         </event-block>
                                     </sub-events>
                                 </event-block>
@@ -1591,9 +1733,12 @@
                                         <condition id="-4" name="Trigger once while true" sid="373195114503678" type="System" />
                                     </conditions>
                                     <actions>
-                                        <action id="-3" name="Set position" sid="811737172072703" type="Peer">
+                                        <action disabled="1" id="-3" name="Set position" sid="811737172072703" type="Peer">
                                             <param id="0" name="X">map.TileToPositionX(Peer.currentTileX)</param>
                                             <param id="1" name="Y">map.TileToPositionY(Peer.currentTileY)</param>
+                                        </action>
+                                        <action behavior="8Direction" id="3" name="Set speed" sid="917557517263216" type="Peer">
+                                            <param id="0" name="Speed">0</param>
                                         </action>
                                         <action id="-16" name="Wait" sid="644833531357556" type="System">
                                             <param id="0" name="Seconds">0.33</param>
@@ -1660,7 +1805,9 @@
                                             <param id="1" name="Comparison">0</param>
                                             <param id="2" name="Value">1</param>
                                         </condition>
-                                        <condition id="-4" name="Trigger once while true" sid="171473992556879" type="System" />
+                                        <condition id="-6" name="Every X seconds" sid="198556340742200" type="System">
+                                            <param id="0" name="Interval (seconds)">0.05</param>
+                                        </condition>
                                     </conditions>
                                     <actions>
                                         <action id="0" name="Spawn another object" sid="725872019055134" type="Peer">
@@ -1669,61 +1816,6 @@
                                             <param id="2" name="Image point">0</param>
                                         </action>
                                         <action id="-8" name="Set angle" sid="997574763892389" type="PeerFade">
-                                            <param id="0" name="Angle">PeerFade.Angle</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="396227751458937" type="System">
-                                            <param id="0" name="Seconds">0.05</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="390904835056646" type="Peer">
-                                            <param id="0" name="Object">PeerFade</param>
-                                            <param id="1" name="Layer">&quot;Game&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="336717156683425" type="PeerFade">
-                                            <param id="0" name="Angle">PeerFade.Angle</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="172312918995686" type="System">
-                                            <param id="0" name="Seconds">0.05</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="619528587200240" type="Peer">
-                                            <param id="0" name="Object">PeerFade</param>
-                                            <param id="1" name="Layer">&quot;Game&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="423400144342480" type="PeerFade">
-                                            <param id="0" name="Angle">PeerFade.Angle</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="183521981881337" type="System">
-                                            <param id="0" name="Seconds">0.05</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="854688770237903" type="Peer">
-                                            <param id="0" name="Object">PeerFade</param>
-                                            <param id="1" name="Layer">&quot;Game&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="317090789520598" type="PeerFade">
-                                            <param id="0" name="Angle">PeerFade.Angle</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="560272092081453" type="System">
-                                            <param id="0" name="Seconds">0.05</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="406035722470273" type="Peer">
-                                            <param id="0" name="Object">PeerFade</param>
-                                            <param id="1" name="Layer">&quot;Game&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="909891323427661" type="PeerFade">
-                                            <param id="0" name="Angle">PeerFade.Angle</param>
-                                        </action>
-                                        <action id="-16" name="Wait" sid="952902760019038" type="System">
-                                            <param id="0" name="Seconds">0.05</param>
-                                        </action>
-                                        <action id="0" name="Spawn another object" sid="170642450103732" type="Peer">
-                                            <param id="0" name="Object">PeerFade</param>
-                                            <param id="1" name="Layer">&quot;Game&quot;</param>
-                                            <param id="2" name="Image point">0</param>
-                                        </action>
-                                        <action id="-8" name="Set angle" sid="260542811061246" type="PeerFade">
                                             <param id="0" name="Angle">PeerFade.Angle</param>
                                         </action>
                                     </actions>
